@@ -11,7 +11,8 @@ RUN sed -i 's/tsflags=nodocs//g' /etc/yum.conf
 RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm
 
 # update
-RUN yum -y update
+RUN yum -y update && \
+ yum clean all
 
 # install software we need to build
 RUN yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs && \
@@ -77,6 +78,21 @@ RUN echo "#!/bin/bash" > /etc/profile.d/user.sh && \
 ENV BASEDIR /data
 RUN mkdir -p /data && chmod 777 /data
 
+USER root
+
+# install HDP 2.4.0.0
+RUN curl -L "http://public-repo-1.hortonworks.com/HDP/centos7/2.x/updates/2.4.0.0/hdp.repo" -o /etc/yum.repos.d/hdp.repo && \
+ yum install -y hadoop hadoop-hdfs hadoop-libhdfs hadoop-yarn hadoop-mapreduce hadoop-client hdp-select && \
+ yum clean all
+
+RUN ln -s /usr/hdp/current/hadoop-hdfs-namenode/../hadoop/sbin/hadoop-daemon.sh /usr/bin/hadoop-daemon.sh
+
+COPY conf/* /etc/hadoop/conf/
+
+COPY entrypoint.sh /usr/bin/entrypoint.sh
+COPY start-hdfs.sh /usr/bin/start-hdfs.sh
+
+
 USER gpadmin
 
 # setup ssh client keys for gpadmin
@@ -85,4 +101,6 @@ RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && \
  chmod 0600 ~/.ssh/authorized_keys
 
 WORKDIR /data
-EXPOSE 5432 22
+EXPOSE 5432 22 8020
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["bash"]
