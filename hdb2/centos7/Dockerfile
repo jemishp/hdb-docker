@@ -108,5 +108,5 @@ CMD ["bash"]
 # install HDB2
 
 RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
- cd /data/hdb && ./configure --prefix=/data/hdb2 --with-python --with-perl  && \
+ cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  && \
  make && make install  
