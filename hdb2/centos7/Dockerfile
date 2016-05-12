@@ -25,7 +25,7 @@ RUN yum -y swap -- remove systemd-container systemd-container-libs -- install sy
  thrift-devel libyaml-devel libevent-devel bzip2-devel openssl-devel \
  openldap-devel protobuf-devel readline-devel net-snmp-devel apr-devel \
  libesmtp-devel xerces-c-devel python-pip json-c-devel libhdfs3-devel \
- apache-ivy java-1.7.0-openjdk-devel libffi libffi-devel\
+ apache-ivy java-1.7.0-openjdk-devel libffi libffi-devel unzip\
  openssh-clients openssh-server && \
  yum clean all
 
@@ -53,12 +53,6 @@ RUN echo "#!/bin/sh" > /etc/profile.d/java.sh && \
 # install libyarn
 RUN mkdir -p /tmp/build && \
  cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libyarn && mkdir build && cd build && \
- ../bootstrap --prefix=/usr && make && make install && ldconfig && \
- rm -rf /tmp/build
-
-# install libhdfs3
-RUN mkdir -p /tmp/build && \
- cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
  ../bootstrap --prefix=/usr && make && make install && ldconfig && \
  rm -rf /tmp/build
 
@@ -101,12 +95,16 @@ RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && \
  chmod 0600 ~/.ssh/authorized_keys
 
 WORKDIR /data
-EXPOSE 5432 22 8020
+EXPOSE 5432 22 8020 51200
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["bash"]
 
-# install HDB2
+# Install HDB2
 
 RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
  cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  && \
  make && make install  
+
+# Install PXf
+
+RUN cd /data/hawq/pxf && make all HD=hdp 
