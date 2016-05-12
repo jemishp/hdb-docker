@@ -108,8 +108,8 @@ CMD ["bash"]
 # Install HDB2
 
 RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
- cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl --with-gphdfs \
- --enable-orca --with-libraries=/usr --with-java --with-r --with-gssapi --with-krb5 --with-pam \
+ cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl --with-includes=/usr/include \
+ --enable-orca --with-libraries=/usr/lib --with-java --with-r --with-gssapi --with-krb5 --with-pam \
  --with-ldap --with-openssl --without-libyarn --without-libhdfs3 \  
  && make && make install  
 
