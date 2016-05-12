@@ -56,6 +56,12 @@ RUN mkdir -p /tmp/build && \
  ../bootstrap --prefix=/usr && make && make install && ldconfig && \
  rm -rf /tmp/build
 
+# install libhdfs3
+RUN mkdir -p /tmp/build && \
+ cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
+ ../bootstrap --prefix=/usr && make && make install && ldconfig && \
+ rm -rf /tmp/build
+
 # create user gpadmin since HAWQ cannot run under root
 RUN groupadd -g 1000 gpadmin && \
  useradd -u 1000 -g 1000 gpadmin && \
@@ -102,8 +108,10 @@ CMD ["bash"]
 # Install HDB2
 
 RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
- cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  && \
- make && make install  
+ cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl --with-gphdfs \
+ --enable-orca --with-libraries=/usr --with-java --with-r --with-gssapi --with-krb5 --with-pam \
+ --with-ldap --with-openssl --without-libyarn --without-libhdfs3 \  
+ && make && make install  
 
 # Install PXf
 
