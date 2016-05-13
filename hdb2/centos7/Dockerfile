@@ -91,6 +91,7 @@ COPY conf/* /etc/hadoop/conf/
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 COPY start-hdfs.sh /usr/bin/start-hdfs.sh
+COPY start-hdb.sh /usr/bin/start-hdb.sh
 
 
 USER gpadmin

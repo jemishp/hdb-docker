@@ -11,5 +11,6 @@ if [ ! -f /etc/profile.d/hadoop.sh ]; then
 fi
 
 sudo start-hdfs.sh
+sudo start-hdb.sh
 
 exec "$@"
