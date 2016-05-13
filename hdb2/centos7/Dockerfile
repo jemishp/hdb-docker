@@ -108,11 +108,11 @@ CMD ["bash"]
 # Install HDB2
 
 RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
- cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl --with-includes=/usr/include \
- --enable-orca --with-libraries=/usr/lib --with-java --with-r --with-gssapi --with-krb5 --with-pam \
- --with-ldap --with-openssl --without-libyarn --without-libhdfs3 \  
+ cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  \
+ --with-r  \
+ --with-libs=/usr/lib/ --with-includes=/usr/include/ \
  && make && make install  
 
 # Install PXf
 
-RUN cd /data/hawq/pxf && make all HD=hdp 
+#RUN cd /data/hawq/pxf && make && make all HD=hdp 
