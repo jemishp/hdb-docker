@@ -12,14 +12,14 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
      echo 'centos7-datanode2' >> /data/hdb2/etc/slaves
      echo 'centos7-datanode3' >> /data/hdb2/etc/slaves
      source /data/hdb2/greenplum_path.sh
-     hawq init cluster
+     hawq init cluster -a
      createdb
    fi
  
    if [ -d /home/gpadmin/hawq-data-directory/masterdd ]; then
      if [ -z "`ps aux | grep masterdd | grep -v grep `" ]; then
        source /data/hdb2/greenplum_path.sh
-       hawq start cluster
+       hawq start cluster -a
      fi
    fi
  else

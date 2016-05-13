@@ -21,3 +21,5 @@ else
   fi
 fi
 
+sudo start-hdb.sh
+

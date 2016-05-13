@@ -93,6 +93,17 @@ COPY entrypoint.sh /usr/bin/entrypoint.sh
 COPY start-hdfs.sh /usr/bin/start-hdfs.sh
 COPY start-hdb.sh /usr/bin/start-hdb.sh
 
+# Install HDB2
+
+RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
+ cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  \
+ --with-r  \
+ --with-libs=/usr/lib/ --with-includes=/usr/include/ \
+ && make && make install  
+
+# Install PXf
+
+#RUN cd /data/hawq/pxf && make && make all HD=hdp 
 
 USER gpadmin
 
@@ -105,15 +116,3 @@ WORKDIR /data
 EXPOSE 5432 22 8020 51200
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["bash"]
-
-# Install HDB2
-
-RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
- cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  \
- --with-r  \
- --with-libs=/usr/lib/ --with-includes=/usr/include/ \
- && make && make install  
-
-# Install PXf
-
-#RUN cd /data/hawq/pxf && make && make all HD=hdp 
