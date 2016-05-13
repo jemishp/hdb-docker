@@ -2,6 +2,14 @@
 
 Pivotal HDB 2.0 Docker Image
 
+HDB 2.0 has the following features enabled:
+
+-Orca
+-PL/python 
+-PL/perl   
+-PL/R   
+
+PXF is also installed and enabled
 
 
 #Collaborator
