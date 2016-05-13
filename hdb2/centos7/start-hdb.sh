@@ -2,6 +2,11 @@
 
 /usr/sbin/sshd
 
+if [ -f /etc/profile.d/hadoop.sh ]; then
+  . /etc/profile.d/hadoop.sh
+fi
+
+
 if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
  if [ "`sudo -u hdfs hdfs dfsadmin -report | grep Live | awk '{print $3}' | tr -d "(|)" | tr -d ":"`" == 3 ]; then
    #  start Hawq as we are on Master
