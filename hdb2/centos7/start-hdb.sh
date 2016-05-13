@@ -12,10 +12,10 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
    #  start Hawq as we are on Master
    echo "hdfs is alive starting HAWQ"
    if [ ! -d /home/gpadmin/hawq-data-directory/masterdd ]; then
-     sed 's|localhost|centos7-namenode|g' -i /data/hdb2/etc/hawq-site.xml
-     echo 'centos7-datanode1' > /data/hdb2/etc/slaves
-     echo 'centos7-datanode2' >> /data/hdb2/etc/slaves
-     echo 'centos7-datanode3' >> /data/hdb2/etc/slaves
+     su -l root -c "sed 's|localhost|centos7-namenode|g' -i /data/hdb2/etc/hawq-site.xml"
+     su -l root -c "echo 'centos7-datanode1' > /data/hdb2/etc/slaves"
+     su -l root -c "cho 'centos7-datanode2' >> /data/hdb2/etc/slaves"
+     su -l root -c "echo 'centos7-datanode3' >> /data/hdb2/etc/slaves"
      source /data/hdb2/greenplum_path.sh
      hawq init cluster -a
      createdb
