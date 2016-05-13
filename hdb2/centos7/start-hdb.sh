@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/usr/sbin/sshd
+sudo /usr/sbin/sshd
 
 if [ -f /etc/profile.d/hadoop.sh ]; then
   . /etc/profile.d/hadoop.sh
