@@ -8,6 +8,7 @@ fi
 
 
 if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
+ sleep 20
  if [ "`sudo -u hdfs hdfs dfsadmin -report | grep Live | awk '{print $3}' | tr -d "(|)" | tr -d ":"`" == 3 ]; then
    #  start Hawq as we are on Master
    echo "hdfs is alive starting HAWQ"
