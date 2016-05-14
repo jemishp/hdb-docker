@@ -94,6 +94,7 @@ COPY start-hdfs.sh /usr/bin/start-hdfs.sh
 COPY start-hdb.sh /usr/bin/start-hdb.sh
 
 # Install HDB2
+USER gpadmin
 
 RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
  cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  \
