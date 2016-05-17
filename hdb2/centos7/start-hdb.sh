@@ -27,7 +27,7 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
      echo "DB created" >> /home/gpadmin/start_hdb.log
      echo "host  all     gpadmin    0.0.0.0/0       trust" >> /home/gpadmin/hawq-data-directory/masterdd/pg_hba.conf
      echo "allowed gpadmin access from any host without password" >> /home/gpadmin/start_hdb.log
-     hawq stop -u
+     hawq restart cluster -a
      echo "HDB config reloaded" >> /home/gpadmin/start_hdb.log
      echo "HDB should be up" >> /home/gpadmin/start_hdb.log
      echo "`ps aux | grep postgres`" >> /home/gpadmin/start_hdb.log
