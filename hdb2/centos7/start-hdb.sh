@@ -25,6 +25,10 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
      echo "cluster inited" >> /home/gpadmin/start_hdb.log
      createdb
      echo "DB created" >> /home/gpadmin/start_hdb.log
+     echo "host  all     gpadmin    0.0.0.0/0       trust" >> /data/hdb2/hawq-data-directory/masterdd/pg_hba.conf
+     echo "allowed gpadmin access from any host without password" >> /home/gpadmin/start_hdb.log
+     hawq stop -u
+     echo "HDB config reloaded" >> /home/gpadmin/start_hdb.log
    fi
  
    if [ -d /home/gpadmin/hawq-data-directory/masterdd ]; then
