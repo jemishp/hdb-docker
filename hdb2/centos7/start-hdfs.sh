@@ -21,5 +21,5 @@ else
   fi
 fi
 
-u -l gpadmin -c "start-hdb.sh"
+su -l gpadmin -c "start-hdb.sh"
 
