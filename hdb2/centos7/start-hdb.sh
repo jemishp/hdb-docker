@@ -8,8 +8,8 @@ fi
 
 
 if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
- echo 'sleeping ' > /home/gpadmin/start_hdb.log
- sleep 10
+ echo 'starting PXF on master' > /home/gpadmin/start_hdb.log
+ sudo service pxf-service start
  if [ "`sudo -u hdfs hdfs dfsadmin -report | grep Live | awk '{print $3}' | tr -d "(|)" | tr -d ":"`" == 3 ]; then
    #  start Hawq as we are on Master
    echo "hdfs is alive and starting HAWQ on ${HOSTNAME} " >> /home/gpadmin/start_hdb.log
@@ -51,5 +51,6 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
   echo "Need to start HDFS"
  fi
 else
-  echo "do nothing on Segments"
+  echo 'starting PXF on segments' > /home/gpadmin/start_hdb.log
+  sudo service pxf-service start
 fi
