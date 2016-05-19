@@ -57,6 +57,6 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
   echo "Need to start HDFS"
  fi
 else
-  echo 'starting PXF on segments' > /home/gpadmin/start_hdb.log
+  echo 'starting PXF on segments' >> /home/gpadmin/start_hdb.log
   sudo service pxf-service start
 fi
