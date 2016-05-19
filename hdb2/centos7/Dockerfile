@@ -112,7 +112,7 @@ RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
 
 RUN cd /data/hawq/pxf && make && make all HD=hdp && make tomcat && \
 cd /data/hawq/pxf/tomcat/build/distributions/ && rpm -i --force --nodeps *.rpm && \
-cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm
+rm -rf /data/hawq/pxf/tomcat/build && cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm && rm -rf /data/hawq/pxf/build
 
 USER gpadmin
 
