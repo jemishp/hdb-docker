@@ -27,6 +27,12 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
      echo "DB created" >> /home/gpadmin/start_hdb.log
      echo "host  all     gpadmin    0.0.0.0/0       trust" >> /home/gpadmin/hawq-data-directory/masterdd/pg_hba.conf
      echo "allowed gpadmin access from any host without password" >> /home/gpadmin/start_hdb.log
+     hawq config -c optimizer_analyze_root_partition -v on
+     hawq config -c optimizer -v on
+     echo "enabled root partition stats and turned optimizer on" >> /home/gpadmin/start_hdb.log
+     gppkg install /data/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
+     /usr/local/madlib/bin/madpack –p hawq install
+     echo "Installed MADlib" >> /home/gpadmin/start_hdb.log
      hawq restart cluster -a
      echo "HDB config reloaded" >> /home/gpadmin/start_hdb.log
      echo "HDB should be up" >> /home/gpadmin/start_hdb.log
