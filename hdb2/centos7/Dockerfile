@@ -74,7 +74,6 @@ RUN sed -i -e 's|Defaults    requiretty|#Defaults    requiretty|' /etc/sudoers
 RUN echo "#!/bin/bash" > /etc/profile.d/user.sh && \
  echo "export USER=\`whoami\`" >> /etc/profile.d/user.sh && \
  chmod a+x /etc/profile.d/user.sh
-
 ENV BASEDIR /data
 RUN mkdir -p /data && chmod 777 /data
 
@@ -109,10 +108,15 @@ RUN git clone --depth=1 https://github.com/apache/incubator-hawq.git /data/hawq 
  && make && make install  
 
 # Install PXf
+USER root
 
-#RUN cd /data/hawq/pxf && make && make all HD=hdp && make tomcat && \
-#cd /data/hawq/pxf/tomcat/build/distributions/ && rpm -i --force --nodeps *.rpm && \
-#rm -rf /data/hawq/pxf/tomcat/build && cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm && rm -rf /data/hawq/pxf/build
+RUN cd /data/hawq/pxf && ./gradlew clean tomcatRpm release -x test -Dhd=hdp && \
+cd /data/hawq/pxf/distributions/ && rpm -i --force --nodeps *.rpm && \
+cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm && \
+cd /data/hawq/pxf/ && \
+./gradlew clean && \
+rm -rf /data/hawq/pxf/apache-tomcat-* && \
+rm -rf /data/hawq/pxf/distributions
 
 USER gpadmin
 

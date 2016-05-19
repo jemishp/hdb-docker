@@ -14,6 +14,8 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
   if [ -z "`ps aux | grep org.apache.hadoop.hdfs.server.namenode.NameNode | grep -v grep`" ]; then
     su -l hdfs -c "hadoop-daemon.sh start namenode"
     sudo -u hdfs hdfs dfs -chmod 777 /
+    sudo -u hdfs hdfs dfs -mkdir /hawq_default
+    sudo -u hdfs hdfs dfs -chown gpadmin:gpadmin /hawq_default
   fi
 else
   if [ -z "`ps aux | grep org.apache.hadoop.hdfs.server.datanode.DataNode | grep -v grep`" ]; then
