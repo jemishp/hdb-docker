@@ -102,7 +102,7 @@ RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && \
  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
  chmod 0600 ~/.ssh/authorized_keys
 
-RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
+RUN git clone --depth=1 https://github.com/apache/incubator-hawq.git /data/hawq && \
  cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  \
  --with-r  \
  --with-libs=/usr/lib/ --with-includes=/usr/include/ \
