@@ -7,7 +7,7 @@ if [ -f /etc/profile.d/hadoop.sh ]; then
 fi
 if [ -f /etc/profile.d/java.sh ]; then
   . /etc/profile.d/java.sh
-
+fi
 
 if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
  echo 'starting PXF on master' > /home/gpadmin/start_hdb.log
