@@ -11,6 +11,7 @@ fi
 
 if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
  echo 'starting PXF on master' > /home/gpadmin/start_hdb.log
+ sudo service pxf-service init
  sudo service pxf-service start
  if [ "`sudo -u hdfs hdfs dfsadmin -report | grep Live | awk '{print $3}' | tr -d "(|)" | tr -d ":"`" == 3 ]; then
    #  start Hawq as we are on Master
