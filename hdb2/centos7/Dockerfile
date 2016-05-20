@@ -106,7 +106,7 @@ RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
  cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  \
  --with-r --enable-depends \
  --with-libs=/usr/lib/ --with-includes=/usr/include/ \
- && make && make install && make clean 
+ && make -j4 && make install && make clean 
 
 # Install PXf
 USER root
