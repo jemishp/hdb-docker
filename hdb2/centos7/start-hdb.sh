@@ -10,6 +10,7 @@ if [ -f /etc/profile.d/java.sh ]; then
 fi
 
 if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
+ sleep 5
  echo 'starting PXF on master' > /home/gpadmin/start_hdb.log
  sudo sed -i 's|/usr/java/default|/etc/alternatives/java_sdk|' /etc/pxf/conf/pxf-env.sh
  sudo service pxf-service init
@@ -34,7 +35,7 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
      hawq config -c optimizer_analyze_root_partition -v on
      hawq config -c optimizer -v on
      echo "enabled root partition stats and turned optimizer on" >> /home/gpadmin/start_hdb.log
-     gppkg install /data/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
+     gppkg --install /data/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
      /usr/local/madlib/bin/madpack –p hawq install
      echo "Installed MADlib" >> /home/gpadmin/start_hdb.log
      hawq restart cluster -a
