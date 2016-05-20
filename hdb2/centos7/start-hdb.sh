@@ -11,6 +11,7 @@ fi
 
 if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
  echo 'starting PXF on master' > /home/gpadmin/start_hdb.log
+ sudo sed -i 's|/usr/java/default|/etc/alternatives/java_sdk|' /etc/pxf/conf/pxf-env.sh
  sudo service pxf-service init
  sudo service pxf-service start
  if [ "`sudo -u hdfs hdfs dfsadmin -report | grep Live | awk '{print $3}' | tr -d "(|)" | tr -d ":"`" == 3 ]; then
@@ -61,5 +62,7 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
  fi
 else
   echo 'starting PXF on segments' >> /home/gpadmin/start_hdb.log
+  sudo sed -i 's|/usr/java/default|/etc/alternatives/java_sdk|' /etc/pxf/conf/pxf-env.sh
+  sudo service pxf-service init
   sudo service pxf-service start
 fi
