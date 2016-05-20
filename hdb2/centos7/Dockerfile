@@ -8,7 +8,9 @@ RUN sed -i 's/tsflags=nodocs//g' /etc/yum.conf
 # add yum repo
 #RUN curl -L "https://bintray.com/wangzw/rpm/rpm" -o /etc/yum.repos.d/bintray-wangzw-rpm.repo
 
-RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm
+RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm && \
+ yum history sync
+
 
 # update
 RUN yum -y update && \
@@ -117,7 +119,7 @@ cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm && \
 cd /data/hawq/pxf/ && \
 ./gradlew clean && \
 rm -rf /data/hawq/pxf/apache-tomcat-* && \
-rm -rf /data/hawq/pxf/distributions
+rm -rf /data/hawq/pxf/distributions && yum history sync && yum clean all
 
 USER gpadmin
 
