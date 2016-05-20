@@ -51,13 +51,13 @@ RUN echo "#!/bin/sh" > /etc/profile.d/java.sh && \
  chmod a+x /etc/profile.d/java.sh
 
 # install libyarn
-#RUN mkdir -p /tmp/build && \
-# cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libyarn && mkdir build && cd build && \
-# ../bootstrap --prefix=/usr && make && make install && ldconfig && \
-# rm -rf /tmp/build
+RUN mkdir -p /tmp/build && \
+ cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libyarn && mkdir build && cd build && \
+ ../bootstrap --prefix=/usr && make && make install && ldconfig && \
+ rm -rf /tmp/build
 
 # install libhdfs3
-RUN mkdir -p /tmp/build && \
+#RUN mkdir -p /tmp/build && \
 # cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
 # ../bootstrap --prefix=/usr && make && make install && ldconfig && \
 # rm -rf /tmp/build
