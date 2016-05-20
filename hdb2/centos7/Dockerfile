@@ -53,7 +53,7 @@ RUN echo "#!/bin/sh" > /etc/profile.d/java.sh && \
 # install libyarn
 RUN mkdir -p /tmp/build && \
  cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libyarn && mkdir build && cd build && \
- ../bootstrap --prefix=/usr && make && make install && ldconfig && \
+ ../bootstrap --prefix=/usr && make -j4 && make install && ldconfig && \
  rm -rf /tmp/build
 
 # install libhdfs3
