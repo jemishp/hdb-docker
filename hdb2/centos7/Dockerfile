@@ -51,16 +51,16 @@ RUN echo "#!/bin/sh" > /etc/profile.d/java.sh && \
  chmod a+x /etc/profile.d/java.sh
 
 # install libyarn
-RUN mkdir -p /tmp/build && \
- cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libyarn && mkdir build && cd build && \
- ../bootstrap --prefix=/usr && make && make install && ldconfig && \
- rm -rf /tmp/build
+#RUN mkdir -p /tmp/build && \
+# cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libyarn && mkdir build && cd build && \
+# ../bootstrap --prefix=/usr && make && make install && ldconfig && \
+# rm -rf /tmp/build
 
 # install libhdfs3
 RUN mkdir -p /tmp/build && \
- cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
- ../bootstrap --prefix=/usr && make && make install && ldconfig && \
- rm -rf /tmp/build
+# cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
+# ../bootstrap --prefix=/usr && make && make install && ldconfig && \
+# rm -rf /tmp/build
 
 # create user gpadmin since HAWQ cannot run under root
 RUN groupadd -g 1000 gpadmin && \
@@ -102,11 +102,11 @@ RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && \
  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
  chmod 0600 ~/.ssh/authorized_keys
 
-RUN git clone --depth=1 https://github.com/apache/incubator-hawq.git /data/hawq && \
+RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
  cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python --with-perl  \
- --with-r  \
+ --with-r --enable-depends \
  --with-libs=/usr/lib/ --with-includes=/usr/include/ \
- && make && make install  
+ && make && make install && make clean 
 
 # Install PXf
 USER root
