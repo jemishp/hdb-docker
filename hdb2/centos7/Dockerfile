@@ -14,7 +14,7 @@ RUN sed -i 's/tsflags=nodocs//g' /etc/yum.conf
 
 # install software we need to build
 RUN yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs && \
- yum update -y && install -y epel-release && \
+ yum update -y && yum install -y epel-release && \
  yum makecache && \
  yum install -y man passwd sudo tar which git mlocate links make bzip2 net-tools \
  autoconf automake libtool m4 gcc gcc-c++ gdb bison flex cmake gperf maven indent \
