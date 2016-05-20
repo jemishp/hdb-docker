@@ -8,13 +8,12 @@ RUN sed -i 's/tsflags=nodocs//g' /etc/yum.conf
 # add yum repo
 #RUN curl -L "https://bintray.com/wangzw/rpm/rpm" -o /etc/yum.repos.d/bintray-wangzw-rpm.repo
 
-#RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm && \
-# yum history sync
+RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm && \
+ yum history sync && yum -y update  && yum clean all
 
 
 # install software we need to build
 RUN yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs && \
- yum update -y && yum install -y epel-release && \
  yum makecache && \
  yum install -y man passwd sudo tar which git mlocate links make bzip2 net-tools \
  autoconf automake libtool m4 gcc gcc-c++ gdb bison flex cmake gperf maven indent \
