@@ -5,6 +5,8 @@ sudo /usr/sbin/sshd
 if [ -f /etc/profile.d/hadoop.sh ]; then
   . /etc/profile.d/hadoop.sh
 fi
+if [ -f /etc/profile.d/java.sh ]; then
+  . /etc/profile.d/java.sh
 
 
 if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
