@@ -87,7 +87,7 @@ COPY conf/* /etc/hadoop/conf/
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 COPY start-hdfs.sh /usr/bin/start-hdfs.sh
-COPY start-hdb.sh /usr/bin/start-hdb.sh
+COPY start-hdb2.sh /usr/bin/start-hdb.sh
 COPY madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz /data/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
 
 # Install HDB2
@@ -101,7 +101,7 @@ RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && \
 
 RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
  cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python  \
- --with-r --enable-depends --enable-debug --enable-orca\
+ --with-r --enable-depend --enable-debug --enable-orca --enable-*\
  --with-libs=/usr/lib/ --with-includes=/usr/include/ \
  && make -j4 && make install && make clean 
 
