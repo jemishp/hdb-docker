@@ -101,7 +101,7 @@ RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && \
 
 RUN git clone https://github.com/apache/incubator-hawq.git /data/hawq && \
  cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python  \
- --with-r --enable-depends \
+ --with-r --enable-depends --enable-debug --enable-orca\
  --with-libs=/usr/lib/ --with-includes=/usr/include/ \
  && make -j4 && make install && make clean 
 
