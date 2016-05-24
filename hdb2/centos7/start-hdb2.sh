@@ -6,8 +6,8 @@ sudo /usr/sbin/sshd
 config_pxf () {
   sudo sed -i 's|/usr/lib/hadoop/lib/native|/usr/hdp/current/hadoop-client/lib/native|' /etc/pxf/conf/pxf-env.sh
   sudo sed -i 's|/usr/java/default|/etc/alternatives/java_sdk|' /etc/pxf/conf/pxf-env.sh
-  echo "# Hadoop home directory" >> /etc/pxf/conf/pxf-env.sh
-  echo "export HADOOP_HOME=${HADOOP_HOME:-/usr/hdp/current/hadoop-client}" >> /etc/pxf/conf/pxf-env.sh
+  sudo echo "# Hadoop home directory" >> /etc/pxf/conf/pxf-env.sh
+  sudo echo "export HADOOP_HOME=${HADOOP_HOME:-/usr/hdp/current/hadoop-client}" >> /etc/pxf/conf/pxf-env.sh
 }
 
 init_pxf () {
@@ -43,7 +43,8 @@ init_hawq () {
 
 inst_madlib () {
   source /data/hdb2/greenplum_path.sh
-  gppkg -i /data/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz -d /home/gpadmin/hawq-data-directory/masterdd
+  tar -xzf madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
+  gppkg -i /data/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.gppkg -d /home/gpadmin/hawq-data-directory/masterdd
   /usr/local/madlib/bin/madpack –p hawq install
 }
 
@@ -113,5 +114,6 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
 else
   echo "starting PXF on segments" >> /home/gpadmin/start_hdb.log
   config_pxf
+  init_pxf
   start_pxf
 fi
