@@ -18,6 +18,10 @@ start_pxf () {
     sudo service pxf-service start
 }
 
+config_hdfs_perms () {
+  sudo -u hdfs hdfs dfs -chmod 777 /
+}
+
 config_slaves () {
   sed 's|localhost|centos7-namenode|g' -i /data/hdb2/etc/hawq-site.xml
   echo 'centos7-datanode1' > /data/hdb2/etc/slaves
@@ -78,6 +82,7 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
    #  start Hawq as we are on Master
    echo "hdfs is alive and starting HAWQ on ${HOSTNAME} " >> /home/gpadmin/start_hdb.log
    echo "running as user `whoami` " >> /home/gpadmin/start_hdb.log
+   config_hdfs_perms
    if [ ! -d /home/gpadmin/hawq-data-directory/masterdd ]; then
      config_slaves
      init_hawq
