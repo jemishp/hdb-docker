@@ -61,7 +61,7 @@ RUN mkdir -p /tmp/build && \
 
 # create user gpadmin since HAWQ cannot run under root
 RUN groupadd -g 1000 gpadmin && \
- useradd -u 1000 -g 1000 -G 993 gpadmin && \
+ useradd -u 1000 -g 1000 -G hadoop gpadmin && \
  echo "gpadmin  ALL=(ALL)       NOPASSWD: ALL" > /etc/sudoers.d/gpadmin
 
 # sudo should not require tty
