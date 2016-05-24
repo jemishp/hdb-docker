@@ -50,7 +50,7 @@ inst_madlib () {
   cd /tmp
   tar -xzf madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
   gppkg -i /tmp/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.gppkg -d /home/gpadmin/hawq-data-directory/masterdd
-  /usr/local/madlib/bin/madpack –p hawq install
+  /data/hdb2/madlib/bin/madpack -p hawq install
 }
 
 start_hawq () {
