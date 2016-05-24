@@ -89,7 +89,7 @@ COPY conf/* /etc/hadoop/conf/
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 COPY start-hdfs.sh /usr/bin/start-hdfs.sh
 COPY start-hdb2.sh /usr/bin/start-hdb.sh
-COPY madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz /data/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
+COPY madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz /tmp/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
 
 # Install HDB2
 
