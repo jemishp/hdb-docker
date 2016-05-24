@@ -59,10 +59,6 @@ RUN mkdir -p /tmp/build && \
 # ../bootstrap --prefix=/usr && make && make install && ldconfig && \
 # rm -rf /tmp/build
 
-# create user gpadmin since HAWQ cannot run under root
-RUN groupadd -g 1000 gpadmin && \
- useradd -u 1000 -g 1000 -G hadoop gpadmin && \
- echo "gpadmin  ALL=(ALL)       NOPASSWD: ALL" > /etc/sudoers.d/gpadmin
 
 # sudo should not require tty
 RUN sed -i -e 's|Defaults    requiretty|#Defaults    requiretty|' /etc/sudoers
@@ -82,6 +78,11 @@ RUN curl -L "http://public-repo-1.hortonworks.com/HDP/centos7/2.x/updates/2.4.0.
  yum clean all
 
 RUN ln -s /usr/hdp/current/hadoop-hdfs-namenode/../hadoop/sbin/hadoop-daemon.sh /usr/bin/hadoop-daemon.sh
+
+# create user gpadmin since HAWQ cannot run under root
+RUN groupadd -g 1000 gpadmin && \
+ useradd -u 1000 -g 1000 -G hadoop gpadmin && \
+ echo "gpadmin  ALL=(ALL)       NOPASSWD: ALL" > /etc/sudoers.d/gpadmin
 
 COPY conf/* /etc/hadoop/conf/
 
