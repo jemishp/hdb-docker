@@ -74,7 +74,7 @@ run-hdfs:
 run-namenode-container:
 	@echo "run ${CLUSTER_ID}-namenode container"
 	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-namenode" | grep -v CONTAINER`" ]; then \
-		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-namenode -p 5432:5432 --name=${CLUSTER_ID}-namenode \
+		docker run -itd -P --net=$(NETWORK) --hostname=${CLUSTER_ID}-namenode --name=${CLUSTER_ID}-namenode \
 			--volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
 	else \
 		echo "${CLUSTER_ID}-namenode container already exist!"; \
@@ -83,7 +83,7 @@ run-namenode-container:
 run-datanode-container:
 	@echo "run ${CLUSTER_ID}-datanode$(CUR_DATANODE) container"
 	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-datanode$(CUR_DATANODE)" | grep -v CONTAINER`" ]; then \
-		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-datanode$(CUR_DATANODE) \
+		docker run -itd -P --net=$(NETWORK) --hostname=${CLUSTER_ID}-datanode$(CUR_DATANODE) \
 			--name=${CLUSTER_ID}-datanode$(CUR_DATANODE) -e NAMENODE=${CLUSTER_ID}-namenode \
 		  --volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
 	else \
