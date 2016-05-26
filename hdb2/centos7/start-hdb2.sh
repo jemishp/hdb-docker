@@ -48,7 +48,7 @@ init_hawq () {
 inst_madlib () {
   source /data/hdb2/greenplum_path.sh
   cd /tmp
-  rpm -i /tmp/madlib-1.9-1.x86_64.rpm
+  sudo rpm -i /tmp/madlib-1.9-1.x86_64.rpm
   if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
     /usr/local/madlib/bin/madpack -p hawq install
   fi
