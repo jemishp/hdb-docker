@@ -49,8 +49,8 @@ inst_madlib () {
   source /data/hdb2/greenplum_path.sh
   cd /tmp
   tar -xzf madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
-  gppkg -i /tmp/madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.gppkg -d /home/gpadmin/hawq-data-directory/masterdd
-  /data/hdb2/madlib/bin/madpack -p hawq install
+  rom -i /tmp/madlib-1.9-1.x86_64.rpm
+  /usr/local/madlib/bin/madpack -p hawq install
 }
 
 start_hawq () {
