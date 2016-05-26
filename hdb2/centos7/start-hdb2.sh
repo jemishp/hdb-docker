@@ -49,7 +49,7 @@ inst_madlib () {
   source /data/hdb2/greenplum_path.sh
   cd /tmp
   tar -xzf madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
-  rom -i /tmp/madlib-1.9-1.x86_64.rpm
+  rpm -i /tmp/madlib-1.9-1.x86_64.rpm
   /usr/local/madlib/bin/madpack -p hawq install
 }
 
