@@ -48,9 +48,10 @@ init_hawq () {
 inst_madlib () {
   source /data/hdb2/greenplum_path.sh
   cd /tmp
-  tar -xzf madlib-ossv1.9_pv1.9.5_hawq2.0-rhel5-x86_64.tar.gz
   rpm -i /tmp/madlib-1.9-1.x86_64.rpm
-  /usr/local/madlib/bin/madpack -p hawq install
+  if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
+    /usr/local/madlib/bin/madpack -p hawq install
+  fi
 }
 
 start_hawq () {
@@ -122,4 +123,5 @@ else
   config_pxf
   init_pxf
   start_pxf
+  inst_madlib
 fi
