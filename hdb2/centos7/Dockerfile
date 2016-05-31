@@ -16,7 +16,7 @@ RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.n
 RUN yum -y swap -- remove systemd-container systemd-container-libs -- install systemd systemd-libs && \
  yum makecache && \
  yum install -y man passwd sudo tar which git mlocate links make bzip2 net-tools \
- autoconf automake libtool m4 gcc gcc-c++ gdb bison flex cmake gperf maven indent \
+ autoconf automake libtool m4 gcc gcc-c++ gdb bison flex cmake3 gperf maven indent \
  libuuid-devel krb5-devel libgsasl-devel expat-devel libxml2-devel \
  perl-ExtUtils-Embed pam-devel python-devel libcurl-devel snappy-devel \
  thrift-devel libyaml-devel libevent-devel bzip2-devel openssl-devel \
@@ -46,6 +46,9 @@ RUN sshd-keygen && \
 RUN echo "#!/bin/sh" > /etc/profile.d/java.sh && \
  echo "export JAVA_HOME=/etc/alternatives/java_sdk" >> /etc/profile.d/java.sh && \
  chmod a+x /etc/profile.d/java.sh
+
+#link correct cmake
+RUN cd /usr/bin/ && ln -s cmake3 cmake && ln -s ccmake3 ccmake && ln -s cpack3 cpack && ln -s ctest3 ctest
 
 # install libyarn
 #RUN mkdir -p /tmp/build && \
