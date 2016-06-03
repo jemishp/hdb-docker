@@ -38,6 +38,7 @@ config_guc () {
   source /data/hdb2/greenplum_path.sh
   hawq config -c optimizer_analyze_root_partition -v on
   hawq config -c optimizer -v on
+  hawq config -c default_hash_table_bucket_number -v 6
 }
 
 init_hawq () {
