@@ -42,6 +42,7 @@ config_guc () {
 
 init_hawq () {
   source /data/hdb2/greenplum_path.sh
+  sudo ldconfig
   hawq init cluster -a
 }
 
