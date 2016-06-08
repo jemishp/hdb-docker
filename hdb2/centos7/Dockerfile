@@ -57,10 +57,10 @@ RUN cd /usr/bin/ && ln -s cmake3 cmake && ln -s ccmake3 ccmake && ln -s cpack3 c
 # rm -rf /tmp/build
 
 # install libhdfs3
-#RUN mkdir -p /tmp/build && \
-# cd /tmp/build && git clone --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
-# ../bootstrap --prefix=/usr && make && make install && ldconfig && \
-# rm -rf /tmp/build
+RUN mkdir -p /tmp/build && \
+ cd /tmp/build && git clone --recursive --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
+ ../bootstrap --prefix=/usr && make && make install && ldconfig && \
+ rm -rf /tmp/build
 
 
 # sudo should not require tty
@@ -111,7 +111,7 @@ RUN git clone --recursive https://github.com/apache/incubator-hawq.git /data/haw
 # Install PXf
 USER root
 
-RUN cd /data/hawq/pxf && ./gradlew clean tomcatRpm release -x test -Dhd=hdp && \
+RUN cd /data/hawq/pxf && ./gradlew clean tomcatRpm release -x pxf-json:test -Dhd=hdp && \
 cd /data/hawq/pxf/distributions/ && rpm -i --force --nodeps *.rpm && \
 cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm && \
 cd /data/hawq/pxf/ && \
