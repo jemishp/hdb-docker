@@ -112,15 +112,16 @@ RUN git clone --recursive https://github.com/apache/incubator-hawq.git /data/haw
 USER root
 
 RUN cd /data/hawq/pxf && ./gradlew clean tomcatRpm release -x pxf-json:test -Dhd=hdp && \
-cd /data/hawq/pxf/distributions/ && rpm -i --force --nodeps *.rpm && \
+cd /data/hawq/pxf/distributions/ && rpm -i *.rpm && \
 cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm && \
 cd /data/hawq/pxf/ && \
 ./gradlew clean && \
-rm -rf /data/hawq/pxf/apache-tomcat-* && \
 rm -rf /data/hawq/pxf/distributions && yum history sync && yum clean all
 
 USER gpadmin
 
+ENV container=docker
+VOLUME /sys/fs/cgroup /run /tmp
 WORKDIR /data
 #EXPOSE 5432 22 8020 51200
 ENTRYPOINT ["entrypoint.sh"]
