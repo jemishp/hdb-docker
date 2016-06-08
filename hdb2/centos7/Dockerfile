@@ -23,7 +23,7 @@ RUN yum -y swap -- remove systemd-container systemd-container-libs -- install sy
  openldap-devel protobuf-devel readline-devel net-snmp-devel apr-devel \
  libesmtp-devel xerces-c-devel python-pip json-c-devel libhdfs3-devel \
  apache-ivy java-1.7.0-openjdk-devel libffi libffi-devel unzip\
- openssh-clients openssh-server R && \
+ openssh-clients openssh-server R tcpdump && \
  yum clean all
 
 
@@ -57,10 +57,10 @@ RUN cd /usr/bin/ && ln -s cmake3 cmake && ln -s ccmake3 ccmake && ln -s cpack3 c
 # rm -rf /tmp/build
 
 # install libhdfs3
-RUN mkdir -p /tmp/build && \
- cd /tmp/build && git clone --recursive --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
- ../bootstrap --prefix=/usr && make && make install && ldconfig && \
- rm -rf /tmp/build
+#RUN mkdir -p /tmp/build && \
+# cd /tmp/build && git clone --recursive --depth=1 https://github.com/apache/incubator-hawq.git . && cd depends/libhdfs3 && mkdir build && cd build && \
+ #../bootstrap --prefix=/data/hdb2 && make && make install && ldconfig && \
+ #rm -rf /tmp/build
 
 
 # sudo should not require tty
