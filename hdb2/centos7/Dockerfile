@@ -111,7 +111,7 @@ RUN git clone --recursive https://github.com/apache/incubator-hawq.git /data/haw
 # Install PXf
 USER root
 
-RUN cd /data/hawq/pxf && ./gradlew clean tomcatRpm release -x pxf-json:test -Dhd=hdp && \
+RUN cd /data/hawq/pxf && ./gradlew clean tomcatRpm release -x test -Dhd=hdp && \
 cd /data/hawq/pxf/distributions/ && rpm -i *.rpm && \
 cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm && \
 cd /data/hawq/pxf/ && \
