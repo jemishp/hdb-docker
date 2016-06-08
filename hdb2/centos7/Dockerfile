@@ -120,8 +120,6 @@ rm -rf /data/hawq/pxf/distributions && yum history sync && yum clean all
 
 USER gpadmin
 
-ENV container=docker
-VOLUME /sys/fs/cgroup /run /tmp
 WORKDIR /data
 #EXPOSE 5432 22 8020 51200
 ENTRYPOINT ["entrypoint.sh"]
