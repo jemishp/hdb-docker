@@ -13,9 +13,9 @@ PXF is also installed and enabled
 
 # BUILD Instructions
 
-git clone this repo
-cd hdb-docker/hdb2
-make run
+1. git clone this repo
+1. cd hdb-docker/hdb2
+1. make run
 
 #Thank You
 A lot of this code was borrowed from wangzw's Docker effort that can be found at: https://hub.docker.com/r/mayjojo/hawq-devel/
