@@ -21,7 +21,7 @@ PXF is also installed and enabled
 1. cd hdb-docker/hdb2
 1. make run (this will configure 1 NN, 3 DN using a pre-built image that it will download from Docker Hub. The NN is HDB Master and DNs are HDB segments)
 
-*Note: Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start-hdb.log to see HDB processes starting up. It usually takes a few minutes before HDB and PXF processes are online. Alternatively you could check for running postgres and pxf using ps. 
+*Note: Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see HDB processes starting up. It usually takes a few minutes before HDB and PXF processes are online. Alternatively you could check for running postgres and pxf using ps. 
 
 To start over, use the commands below:
 
