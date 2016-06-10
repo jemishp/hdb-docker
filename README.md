@@ -10,12 +10,16 @@ HDB 2.0 has the following features enabled:
 -MADLib
 
 PXF is also installed and enabled
+# Prerequisites
+1. Installed and Running Docker on linux or docker-machine on OSX
+1. At least > 8GB RAM
+1. At least > 16GB Disk Space  
 
 # BUILD Instructions
 
 1. git clone this repo
 1. cd hdb-docker/hdb2
-1. make run
+1. make run (this will configure 1 NN, 3 DN using a pre-built image that it will download from Docker Hub. The NN is HDB Master and DNs are HDB segments)
 
 *Note: Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start-hdb.log to see HDB processes starting up. It usually takes a few minutes before HDB and PXF processes are online. Alternatively you could check for running postgres and pxf using ps. 
 
