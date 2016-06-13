@@ -23,7 +23,7 @@ RUN yum -y swap -- remove systemd-container systemd-container-libs -- install sy
  openldap-devel protobuf-devel readline-devel net-snmp-devel apr-devel \
  libesmtp-devel xerces-c-devel python-pip json-c-devel libhdfs3-devel \
  apache-ivy java-1.7.0-openjdk-devel libffi libffi-devel unzip\
- openssh-clients openssh-server R tcpdump && \
+ openssh-clients openssh-server R tcpdump wget bsdtar && \
  yum clean all
 
 
