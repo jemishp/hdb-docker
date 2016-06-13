@@ -116,7 +116,8 @@ cd /data/hawq/pxf/distributions/ && rpm -i *.rpm && \
 cd /data/hawq/pxf/build/distributions/ && rpm -i --force --nodeps pxf*.rpm && \
 cd /data/hawq/pxf/ && \
 ./gradlew clean && \
-rm -rf /data/hawq/pxf/distributions && yum history sync && yum clean all
+rm -rf /data/hawq/pxf/distributions && \
+rm -rf /data/hawq && yum history sync && yum clean all
 
 USER gpadmin
 
