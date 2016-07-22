@@ -7,7 +7,7 @@ config_pxf () {
   sudo sed -i 's|/usr/lib/hadoop/lib/native|/usr/hdp/current/hadoop-client/lib/native|' /etc/pxf/conf/pxf-env.sh
   sudo sed -i 's|/usr/java/default|/etc/alternatives/java_sdk|' /etc/pxf/conf/pxf-env.sh
   sudo sed -i '$ a\# Hadoop HOME directory'  /etc/pxf/conf/pxf-env.sh
-  sudo sed -i '$ a\export HADOOP_HOME=/usr/hdp/current/hadoop-client' /etc/pxf/conf/pxf-env.sh
+  sudo sed -i '$ a\ export HADOOP_HOME=/usr/hdp/current/hadoop-client' /etc/pxf/conf/pxf-env.sh
 }
 
 init_pxf () {
