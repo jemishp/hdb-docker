@@ -22,7 +22,7 @@ config_hdfs_perms () {
   sudo -u hdfs hdfs dfs -chmod 777 /
 }
 
-config_slaves () {
+config_workers () {
   sed 's|localhost|centos7-namenode|g' -i /data/hdb2/etc/hawq-site.xml
   echo 'centos7-datanode1' > /data/hdb2/etc/slaves
   echo 'centos7-datanode2' >> /data/hdb2/etc/slaves
@@ -87,7 +87,7 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
    echo "running as user `whoami` " >> /home/gpadmin/start_hdb.log
    config_hdfs_perms
    if [ ! -d /home/gpadmin/hawq-data-directory/masterdd ]; then
-     config_slaves
+     config_workers
      init_hawq
      echo "cluster inited" >> /home/gpadmin/start_hdb.log
      createdb
