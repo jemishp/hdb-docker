@@ -30,25 +30,25 @@ config_workers () {
   echo "edited the slaves file " >> /home/gpadmin/start_hdb.log
 }
 
+config_bashrc () {
+  echo "source /data/hdb2/greenplum_path.sh" >> /home/gpadmin/.bashrc
+}
 config_access () {
   echo "host  all     gpadmin    0.0.0.0/0       trust" >> /home/gpadmin/hawq-data-directory/masterdd/pg_hba.conf
 }
 
 config_guc () {
-  source /data/hdb2/greenplum_path.sh
   hawq config -c optimizer_analyze_root_partition -v on
   hawq config -c optimizer -v on
   hawq config -c default_hash_table_bucket_number -v 6
 }
 
 init_hawq () {
-  source /data/hdb2/greenplum_path.sh
   sudo ldconfig
   hawq init cluster -a
 }
 
 inst_madlib () {
-  source /data/hdb2/greenplum_path.sh
   cd /tmp
   sudo rpm -i /tmp/madlib-1.9-1.x86_64.rpm
   if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
@@ -57,12 +57,10 @@ inst_madlib () {
 }
 
 start_hawq () {
-  source /data/hdb2/greenplum_path.sh
   hawq start cluster -a
 }
 
 restart_hawq () {
-   source /data/hdb2/greenplum_path.sh
    hawq restart cluster -a
 }
 
@@ -87,6 +85,7 @@ if [ "${NAMENODE}" == "${HOSTNAME}" ]; then
    echo "running as user `whoami` " >> /home/gpadmin/start_hdb.log
    config_hdfs_perms
    if [ ! -d /home/gpadmin/hawq-data-directory/masterdd ]; then
+     config_bashrc
      config_workers
      init_hawq
      echo "cluster inited" >> /home/gpadmin/start_hdb.log
@@ -125,5 +124,6 @@ else
   config_pxf
   init_pxf
   start_pxf
+  config_bashrc
   inst_madlib
 fi
