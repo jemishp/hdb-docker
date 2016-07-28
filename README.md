@@ -34,6 +34,6 @@ To start over, use the commands below:
 1. make distclean
 1. make run
 
-#Thank You
+### Thank You
 The building blocks for this code are from wangzw's Docker effort that can be found at: https://hub.docker.com/r/mayjojo/hawq-devel/
 I enhanced it and added in components like Apache HAWQ (incubating), PXF, PL/* languages, MADLib, etc.
