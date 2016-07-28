@@ -25,7 +25,7 @@ External data Query Framework or PXF is also installed and enabled.
 1. cd hdb-docker/hdb2
 1. make run (this will configure 1 NN, 3 DNs using a pre-built image that it will download from Docker Hub. The NN is Apache HAWQ (incubating) Master and DNs are Apache HAWQ (incubating) segments)
 
-*Note*: Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
+**Note**: Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
 
 To start over, use the commands below:
 
