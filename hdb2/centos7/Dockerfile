@@ -8,7 +8,7 @@ RUN sed -i 's/tsflags=nodocs//g' /etc/yum.conf
 # add yum repo for libhdfs3
 #RUN curl -L "https://bintray.com/wangzw/rpm/rpm" -o /etc/yum.repos.d/bintray-wangzw-rpm.repo
 
-RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm && \
+RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-7.noarch.rpm && \
  yum history sync && yum -y update  && yum clean all
 
 
@@ -27,7 +27,7 @@ RUN yum -y swap -- remove systemd-container systemd-container-libs -- install sy
  yum clean all
 
 
-# install python module 
+# install python module
 RUN yum makecache && yum install -y postgresql-devel && \
  pip --retries=50 --timeout=300 install --upgrade pip && \
  pip --retries=50 --timeout=300 install pg8000 simplejson unittest2 pycrypto pygresql pyyaml lockfile paramiko psi && \
@@ -106,7 +106,7 @@ RUN ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa && \
 RUN git clone --recursive https://github.com/apache/incubator-hawq.git /data/hawq && \
  cd /data/hawq && ./configure --prefix=/data/hdb2 --with-python  \
  --with-r --with-ldap --with-pam --with-gssapi --with-openssl --with-krb5 --enable-orca --enable-debug \
- && make -j4 && make install && make clean 
+ && make -j4 && make install && make clean
 
 # Install PXf
 USER root
