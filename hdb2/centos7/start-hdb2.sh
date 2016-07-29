@@ -32,6 +32,7 @@ config_workers () {
 
 config_bashrc () {
   echo "source /data/hdb2/greenplum_path.sh" >> /home/gpadmin/.bashrc
+  source ~/.bashrc
 }
 config_access () {
   echo "host  all     gpadmin    0.0.0.0/0       trust" >> /home/gpadmin/hawq-data-directory/masterdd/pg_hba.conf
