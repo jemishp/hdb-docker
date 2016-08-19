@@ -15,11 +15,16 @@ start_zeppelin () {
   /usr/local/zeppelin-*/bin/zeppelin-daemon.sh start &
 }
 
+install_interpreters () {
+  bin/install-interpreter.sh -n shell,python,postgresql,file
+}
+
 if [ "${HOSTNAME}" == "centos7-zepp-datanode1" ]; then
   echo "Will install zeppelin on this node"
   download_zeppelin
   unzip_zeppelin
   start_zeppelin
+  install_interpreters
 else
   echo "No zeppelin needed"
 fi
