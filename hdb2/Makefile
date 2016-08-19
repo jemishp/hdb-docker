@@ -153,8 +153,8 @@ stop-hdfs:
 		make -f $(THIS_MAKEFILE_PATH) CUR_DATANODE=$$i stop-datanode-container; \
 		i=$$((i+1)); \
 	done
-	if [ ${ZEPP} = 1 ] ; then make -f $(THIS_MAKEFILE_PATH) stop-zepp-container ; fi
-	if [ ${SCDF} = 1 ] ; then make -f $(THIS_MAKEFILE_PATH) stop-scdf-container ; fi
+	@if [ ${ZEPP} == 1 ] ; then make -f $(THIS_MAKEFILE_PATH) stop-zepp-container ; fi
+	@if [ ${SCDF} == 1 ] ; then make -f $(THIS_MAKEFILE_PATH) stop-scdf-container ; fi
 	@echo "Done!"
 
 stop-namenode-container:
