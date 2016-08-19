@@ -11,8 +11,10 @@ CLUSTER_ID := $(OS_VERSION)
 LOCAL :=
 # networks used in docker
 NETWORK := $(CLUSTER_ID)_hawq_network
+ZEPP := 1
+SCDF := 1
 
-all: 
+all:
 	@echo " Usage:"
 	@echo "    To setup a build and test environment:         make run"
 	@echo "    To start all containers:                       make start"
@@ -58,7 +60,9 @@ run:
 	                docker network create --driver bridge $(NETWORK); \
 	        fi && \
 	        make -f $(THIS_MAKEFILE_PATH) create-data-container && \
-                make -f $(THIS_MAKEFILE_PATH) run-hdfs; \
+                make -f $(THIS_MAKEFILE_PATH) run-hdfs;  && \
+                @if [ ${ZEPP} = 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-zepp ; fi
+                @if [ ${SCDF} = 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-scdf ; fi
 	fi
 
 run-hdfs:
@@ -89,6 +93,12 @@ run-datanode-container:
 	else \
 		echo "${CLUSTER_ID}-datanode$(CUR_DATANODE) container already exist!"; \
 	fi
+
+run-zepp:
+	@echo "Running Zeppelin "
+
+run-scdf:
+	@echo "Running Spring Cloud DataFlow "
 
 start:
 	@make -f $(THIS_MAKEFILE_PATH) start-hdfs
