@@ -96,9 +96,25 @@ run-datanode-container:
 
 run-zepp:
 	@echo "Running Zeppelin "
+	@echo "run ${CLUSTER_ID}-zepp-datanode$(ZEPP) container"
+	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-zepp-datanode$(ZEPP)" | grep -v CONTAINER`" ]; then \
+		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-zepp-datanode$(ZEPP) \
+			--name=${CLUSTER_ID}-zepp-datanode$(ZEPP) -e NAMENODE=${CLUSTER_ID}-namenode \
+			--volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
+	else \
+		echo "${CLUSTER_ID}-zepp-datanode$(ZEPP) container already exist!"; \
+	fi
 
 run-scdf:
 	@echo "Running Spring Cloud DataFlow "
+	@echo "run ${CLUSTER_ID}-scdf-datanode$(SCDF) container"
+	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-scdf-datanode$(SCDF)" | grep -v CONTAINER`" ]; then \
+		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-scdf-datanode$(SCDF) \
+			--name=${CLUSTER_ID}-scdf-datanode$(SCDF) -e NAMENODE=${CLUSTER_ID}-namenode \
+			--volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
+	else \
+		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container already exist!"; \
+	fi
 
 start:
 	@make -f $(THIS_MAKEFILE_PATH) start-hdfs
