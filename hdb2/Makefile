@@ -61,8 +61,8 @@ run:
 	        fi && \
 	        make -f $(THIS_MAKEFILE_PATH) create-data-container && \
                 make -f $(THIS_MAKEFILE_PATH) run-hdfs  && \
-              	if [ ${ZEPP} == 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-zepp ; fi && \
-              	if [ ${SCDF} == 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-scdf ; fi \
+              	if [ ${ZEPP} == 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-zepp-container ; fi && \
+              	if [ ${SCDF} == 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-scdf-container ; fi \
 	fi
 
 run-hdfs:
@@ -94,7 +94,7 @@ run-datanode-container:
 		echo "${CLUSTER_ID}-datanode$(CUR_DATANODE) container already exist!"; \
 	fi
 
-run-zepp:
+run-zepp-container:
 	@echo "run ${CLUSTER_ID}-zepp-datanode$(ZEPP) container"
 	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-zepp-datanode$(ZEPP)" | grep -v CONTAINER`" ]; then \
 		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-zepp-datanode$(ZEPP) \
@@ -104,7 +104,7 @@ run-zepp:
 		echo "${CLUSTER_ID}-zepp-datanode$(ZEPP) container already exist!"; \
 	fi
 
-run-scdf:
+run-scdf-container:
 	@echo "run ${CLUSTER_ID}-scdf-datanode$(SCDF) container"
 	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-scdf-datanode$(SCDF)" | grep -v CONTAINER`" ]; then \
 		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-scdf-datanode$(SCDF) \
@@ -153,6 +153,8 @@ stop-hdfs:
 		make -f $(THIS_MAKEFILE_PATH) CUR_DATANODE=$$i stop-datanode-container; \
 		i=$$((i+1)); \
 	done
+	if [ ${ZEPP} == 1 ]; then make -f $(THIS_MAKEFILE_PATH) stop-zepp-container ; fi && \
+	if [ ${SCDF} == 1 ]; then make -f $(THIS_MAKEFILE_PATH) stop-scdf-container ; fi
 	@echo "Done!"
 
 stop-namenode-container:
@@ -169,6 +171,22 @@ stop-datanode-container:
 		docker stop -t 0 ${CLUSTER_ID}-datanode$(CUR_DATANODE); \
 	else \
 		echo "${CLUSTER_ID}-datanode$(CUR_DATANODE) container does not exist!"; \
+	fi
+
+stop-zepp-container:
+	@echo "stop ${CLUSTER_ID}-zepp-datanode$(ZEPP) container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-zepp-datanode$(ZEPP)" | grep -v CONTAINER`" ]; then \
+		docker stop -t 0 ${CLUSTER_ID}-zepp-datanode$(ZEPP); \
+	else \
+		echo "${CLUSTER_ID}-zepp-datanode$(ZEPP) container does not exist!"; \
+	fi
+
+stop-scdf-container:
+	@echo "stop ${CLUSTER_ID}-scdf-datanode$(SCDF) container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-scdf-datanode$(SCDF)" | grep -v CONTAINER`" ]; then \
+		docker stop -t 0 ${CLUSTER_ID}-scdf-datanode$(SCDF); \
+	else \
+		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container does not exist!"; \
 	fi
 
 remove-hdfs:
@@ -196,6 +214,22 @@ remove-datanode-container:
 		echo "${CLUSTER_ID}-datanode$(CUR_DATANODE) container does not exist!"; \
 	fi
 
+remove-zepp-container:
+	@echo "make ${CLUSTER_ID}-zepp-datanode$(ZEPP) container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-zepp-datanode$(ZEPP)" | grep -v CONTAINER`" ]; then \
+		docker rm ${CLUSTER_ID}-zepp-datanode$(ZEPP); \
+	else \
+		echo "${CLUSTER_ID}-zepp-datanode$(ZEPP) container does not exist!"; \
+	fi
+
+remove-scdf-container:
+	@echo "make ${CLUSTER_ID}-scdf-datanode$(SCDF) container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-scdf-datanode$(SCDF)" | grep -v CONTAINER`" ]; then \
+		docker rm ${CLUSTER_ID}-scdf-datanode$(SCDF); \
+	else \
+		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container does not exist!"; \
+	fi
+
 remove-data:
 	@echo remove ${CLUSTER_ID}-data container
 	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-data" | grep -v CONTAINER`" ]; then \
@@ -212,11 +246,15 @@ remove-data:
 clean:
 	@make -f $(THIS_MAKEFILE_PATH) stop 2>&1 >/dev/null || true
 	@make -f $(THIS_MAKEFILE_PATH) remove-hdfs 2>&1 >/dev/null || true
+	@make -f $(THIS_MAKEFILE_PATH) remove-zepp-container 2>&1 >/dev/null || true
+	@make -f $(THIS_MAKEFILE_PATH) remove-scdf-container 2>&1 >/dev/null || true
 	@echo "Done!"
 
 distclean:
 	@make -f $(THIS_MAKEFILE_PATH) stop 2>&1 >/dev/null || true
 	@make -f $(THIS_MAKEFILE_PATH) remove-hdfs 2>&1 >/dev/null || true
+	@make -f $(THIS_MAKEFILE_PATH) remove-zepp-container 2>&1 >/dev/null || true
+	@make -f $(THIS_MAKEFILE_PATH) remove-scdf-container 2>&1 >/dev/null || true
 	@make -f $(THIS_MAKEFILE_PATH) remove-data 2>&1 >/dev/null || true
 	@if [ ! -z "`docker network ls 2>/dev/null | grep $(NETWORK)`" ]; then \
 	        echo remove network $(NETWORK); \
