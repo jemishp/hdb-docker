@@ -94,7 +94,7 @@ COPY start-hdfs.sh /usr/bin/start-hdfs.sh
 COPY start-hdb2.sh /usr/bin/start-hdb.sh
 COPY start-zepp.sh /usr/bin/start-zepp.sh
 COPY madlib-1.9-1.x86_64.rpm /tmp/madlib-1.9-1.x86_64.rpm
-COPY zeppelin-0.6.1-bin-netinst.tgz /tmp/zeppelin-0.6.1-bin-netinst.tgz
+
 
 # Install HDB2
 
