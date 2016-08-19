@@ -95,7 +95,6 @@ run-datanode-container:
 	fi
 
 run-zepp:
-	@echo "Running Zeppelin "
 	@echo "run ${CLUSTER_ID}-zepp-datanode$(ZEPP) container"
 	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-zepp-datanode$(ZEPP)" | grep -v CONTAINER`" ]; then \
 		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-zepp-datanode$(ZEPP) \
@@ -106,7 +105,6 @@ run-zepp:
 	fi
 
 run-scdf:
-	@echo "Running Spring Cloud DataFlow "
 	@echo "run ${CLUSTER_ID}-scdf-datanode$(SCDF) container"
 	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-scdf-datanode$(SCDF)" | grep -v CONTAINER`" ]; then \
 		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-scdf-datanode$(SCDF) \
