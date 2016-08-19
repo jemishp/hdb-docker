@@ -97,7 +97,7 @@ run-datanode-container:
 run-zepp-container:
 	@echo "run ${CLUSTER_ID}-zepp-datanode$(ZEPP) container"
 	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-zepp-datanode$(ZEPP)" | grep -v CONTAINER`" ]; then \
-		docker run -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-zepp-datanode$(ZEPP) \
+		docker run -itd -p 9080:8080 --net=$(NETWORK) --hostname=${CLUSTER_ID}-zepp-datanode$(ZEPP) \
 			--name=${CLUSTER_ID}-zepp-datanode$(ZEPP) -e NAMENODE=${CLUSTER_ID}-namenode \
 			--volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
 	else \
