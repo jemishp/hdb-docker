@@ -61,8 +61,8 @@ run:
 	        fi && \
 	        make -f $(THIS_MAKEFILE_PATH) create-data-container && \
                 make -f $(THIS_MAKEFILE_PATH) run-hdfs  && \
-              	if [ ${ZEPP} == 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-zepp-container ; fi && \
-              	if [ ${SCDF} == 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-scdf-container ; fi \
+              	if [ ${ZEPP} = 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-zepp-container ; fi && \
+              	if [ ${SCDF} = 1 ]; then make -f $(THIS_MAKEFILE_PATH) run-scdf-container ; fi \
 	fi
 
 run-hdfs:
