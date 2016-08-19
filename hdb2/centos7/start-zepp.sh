@@ -2,8 +2,9 @@
 
 sudo /usr/sbin/sshd
 
-donwload_zeppelin () {
-  curl -O http://apache.cs.utah.edu/zeppelin/zeppelin-0.6.1/zeppelin-0.6.1-bin-all.tgz
+download_zeppelin () {
+  cd /tmp/
+  curl -O http://apache.mirrors.pair.com/zeppelin/zeppelin-0.6.1/zeppelin-0.6.1-bin-netinst.tgz
 }
 
 unzip_zeppelin () {
@@ -16,6 +17,7 @@ start_zeppelin () {
 
 if [ "${HOSTNAME}" == "centos7-zepp-datanode1" ]; then
   echo "Will install zeppelin on this node"
+  download_zeppelin
   unzip_zeppelin
   start_zeppelin
 else
