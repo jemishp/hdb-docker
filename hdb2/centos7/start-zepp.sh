@@ -16,7 +16,7 @@ start_zeppelin () {
 }
 
 install_interpreters () {
-  bin/install-interpreter.sh -n shell,python,postgresql,file
+  bin/install-interpreter.sh -n shell,python,postgresql,file,angular,md,jdbc,elasticsearch,hbase
 }
 
 if [ "${HOSTNAME}" == "centos7-zepp-datanode1" ]; then
