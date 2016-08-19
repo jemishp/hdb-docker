@@ -8,7 +8,7 @@ RUN sed -i 's/tsflags=nodocs//g' /etc/yum.conf
 # add yum repo for libhdfs3
 #RUN curl -L "https://bintray.com/wangzw/rpm/rpm" -o /etc/yum.repos.d/bintray-wangzw-rpm.repo
 
-RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-7.noarch.rpm && \
+RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm && \
  yum history sync && yum -y update  && yum clean all
 
 
