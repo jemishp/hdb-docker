@@ -8,11 +8,11 @@ download_zeppelin () {
 }
 
 unzip_zeppelin () {
-  tar -xvzf /tmp/zeppelin-0.6.1-bin-netinst.tgz -C /usr/local/
+  sudo tar -xvzf /tmp/zeppelin-0.6.1-bin-netinst.tgz -C /usr/local/
 }
 
 start_zeppelin () {
-  /usr/local/zeppelin/bin/zeppelin-daemon.sh start &
+  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh start &
 }
 
 if [ "${HOSTNAME}" == "centos7-zepp-datanode1" ]; then
