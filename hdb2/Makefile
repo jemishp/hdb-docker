@@ -279,6 +279,11 @@ remove-data:
 #	docker pull mayjojo/hawq-devel:$(OS_VERSION)
 #	docker pull mayjojo/hawq-test:$(OS_VERSION)
 
+restart:
+	@echo restarting all containers
+	@make -f $(THIS_MAKEFILE_PATH) stop
+	@make -f $(THIS_MAKEFILE_PATH) start
+
 clean:
 	@make -f $(THIS_MAKEFILE_PATH) stop 2>&1 >/dev/null || true
 	@make -f $(THIS_MAKEFILE_PATH) remove-hdfs 2>&1 >/dev/null || true
