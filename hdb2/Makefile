@@ -125,6 +125,8 @@ start-hdfs:
 		make -f $(THIS_MAKEFILE_PATH) CUR_DATANODE=$$i start-datanode-container; \
 		i=$$((i+1)); \
 	done
+	@if [ ${ZEPP} = 1 ] ; then make -f $(THIS_MAKEFILE_PATH) start-zepp-container ; fi
+	@if [ ${SCDF} = 1 ] ; then make -f $(THIS_MAKEFILE_PATH) start-scdf-container ; fi
 	@echo "Done!"
 
 start-namenode-container:
@@ -141,6 +143,28 @@ start-datanode-container:
 		docker start ${CLUSTER_ID}-datanode$(CUR_DATANODE); \
 	else \
 		echo "${CLUSTER_ID}-datanode$(CUR_DATANODE) container does not exist!" && exit 1; \
+	fi
+
+start-zepp-container:
+	@echo "start ${CLUSTER_ID}-zepp-datanode$(ZEPP) container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-zepp-datanode$(ZEPP)" | grep -v CONTAINER`" ]; then \
+		docker start ${CLUSTER_ID}-zepp-datanode$(ZEPP); \
+	else \
+		echo "${CLUSTER_ID}-zepp-datanode$(ZEPP) container does not exist!"; \
+	fi
+
+stop-scdf-container:
+	@echo "stop ${CLUSTER_ID}-scdf-datanode$(SCDF) container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-scdf-datanode$(SCDF)" | grep -v CONTAINER`" ]; then \
+		docker start ${CLUSTER_ID}-scdf-datanode$(SCDF); \
+	else \
+		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container does not exist!"; \
+	fi
+	@echo "stop ${CLUSTER_ID}-kafka container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-kafka" | grep -v CONTAINER`" ]; then \
+		docker start ${CLUSTER_ID}-kafka; \
+	else \
+		echo "${CLUSTER_ID}-kafka container does not exist!"; \
 	fi
 
 stop:
@@ -188,6 +212,12 @@ stop-scdf-container:
 	else \
 		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container does not exist!"; \
 	fi
+	@echo "stop ${CLUSTER_ID}-kafka container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-kafka" | grep -v CONTAINER`" ]; then \
+		docker stop -t 0 ${CLUSTER_ID}-kafka; \
+	else \
+		echo "${CLUSTER_ID}-kafka container does not exist!"; \
+	fi
 
 remove-hdfs:
 	@make -f $(THIS_MAKEFILE_PATH) remove-namenode-container
@@ -228,6 +258,12 @@ remove-scdf-container:
 		docker rm ${CLUSTER_ID}-scdf-datanode$(SCDF); \
 	else \
 		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container does not exist!"; \
+	fi
+	@echo "make ${CLUSTER_ID}-kafka container"
+	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-kafka" | grep -v CONTAINER`" ]; then \
+		docker rm ${CLUSTER_ID}-kafka; \
+	else \
+		echo "${CLUSTER_ID}-kafka container does not exist!"; \
 	fi
 
 remove-data:
