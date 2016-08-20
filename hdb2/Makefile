@@ -161,7 +161,7 @@ start-zepp-container:
 		echo "${CLUSTER_ID}-zepp-datanode$(ZEPP) container does not exist!"; \
 	fi
 
-stop-scdf-container:
+start-scdf-container:
 	@echo "stop ${CLUSTER_ID}-scdf-datanode$(SCDF) container"
 	@if [ ! -z "`docker ps -a --filter="name=${CLUSTER_ID}-scdf-datanode$(SCDF)" | grep -v CONTAINER`" ]; then \
 		docker start ${CLUSTER_ID}-scdf-datanode$(SCDF); \
