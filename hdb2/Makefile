@@ -113,6 +113,14 @@ run-scdf-container:
 	else \
 		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container already exists!"; \
 	fi
+	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-kafka" | grep -v CONTAINER`" ]; then \
+		docker run -itd -p 2181:2181 -p 9092:9092 --net=$(NETWORK) --hostname=${CLUSTER_ID}-kafka \
+			--name=${CLUSTER_ID}-kafka -e NAMENODE=${CLUSTER_ID}-namenode -e ADVERTISED_PORT=9092 \
+			-e KAFKA=${CLUSTER_ID}-kafka:9092 -e ZOOKEEPER=${CLUSTER_ID}-kafka:2181 \
+			--volumes-from ${CLUSTER_ID}-data spotify/kafka; \
+	else \
+		echo "${CLUSTER_ID}-kafka container already exists!"; \
+	fi
 
 start:
 	@make -f $(THIS_MAKEFILE_PATH) start-hdfs
