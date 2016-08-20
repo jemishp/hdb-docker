@@ -47,7 +47,7 @@ create-data-container:
 			docker create -v $(LOCAL):/data --name=${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION) /bin/true; \
 		fi \
 	else \
-		echo "${CLUSTER_ID}-data container already exist!"; \
+		echo "${CLUSTER_ID}-data container already exists!"; \
 	fi
 
 run:
@@ -81,7 +81,7 @@ run-namenode-container:
 		docker run -itd  -p 5432:5432 -p 4444:22 --privileged --net=$(NETWORK) --hostname=${CLUSTER_ID}-namenode --name=${CLUSTER_ID}-namenode \
 			--volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
 	else \
-		echo "${CLUSTER_ID}-namenode container already exist!"; \
+		echo "${CLUSTER_ID}-namenode container already exists!"; \
 	fi
 
 run-datanode-container:
@@ -91,7 +91,7 @@ run-datanode-container:
 			--name=${CLUSTER_ID}-datanode$(CUR_DATANODE) -e NAMENODE=${CLUSTER_ID}-namenode \
 		  --volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
 	else \
-		echo "${CLUSTER_ID}-datanode$(CUR_DATANODE) container already exist!"; \
+		echo "${CLUSTER_ID}-datanode$(CUR_DATANODE) container already exists!"; \
 	fi
 
 run-zepp-container:
@@ -101,7 +101,7 @@ run-zepp-container:
 			--name=${CLUSTER_ID}-zepp-datanode$(ZEPP) -e NAMENODE=${CLUSTER_ID}-namenode \
 			--volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
 	else \
-		echo "${CLUSTER_ID}-zepp-datanode$(ZEPP) container already exist!"; \
+		echo "${CLUSTER_ID}-zepp-datanode$(ZEPP) container already exists!"; \
 	fi
 
 run-scdf-container:
@@ -111,7 +111,7 @@ run-scdf-container:
 			--name=${CLUSTER_ID}-scdf-datanode$(SCDF) -e NAMENODE=${CLUSTER_ID}-namenode \
 			--volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
 	else \
-		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container already exist!"; \
+		echo "${CLUSTER_ID}-scdf-datanode$(SCDF) container already exists!"; \
 	fi
 
 start:
