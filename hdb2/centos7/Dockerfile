@@ -126,7 +126,7 @@ RUN git clone https://github.com/spring-cloud/spring-cloud-dataflow.git /data/sc
 cd /data/scdf && ./mvnw clean install && \
 cp /data/scdf/spring-cloud-dataflow-server-local/target/spring-cloud-dataflow-server-local-*.BUILD-SNAPSHOT.jar /data/ && \
 cp /data/scdf/spring-cloud-dataflow-shell/target/spring-cloud-dataflow-shell-*.BUILD-SNAPSHOT.jar /data/ && \
-./mvn clean && \
+./mvnw clean && \
 rm -rf /data/scdf
 
 USER gpadmin
