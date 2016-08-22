@@ -122,12 +122,12 @@ rm -rf /data/hawq/pxf/distributions && \
 rm -rf /data/hawq && yum history sync && yum clean all
 
 # Install SCDF
-RUN git clone https://github.com/spring-cloud/spring-cloud-dataflow.git /data/scdf && \
-cd /data/scdf/spring-cloud-dataflow/ && mvn clean package && \
-cp /data/scdf/spring-cloud-dataflow/spring-cloud-dataflow-server-local/target/spring-cloud-dataflow-server-local-*.jar /data/ && \
-cp /data/scdf/spring-cloud-dataflow/spring-cloud-dataflow-shell/target/spring-cloud-dataflow-shell-*.jar /data/ && \
-mvn clean && \
-rm -rf /data/scdf
+#RUN git clone https://github.com/spring-cloud/spring-cloud-dataflow.git /data/scdf && \
+#cd /data/scdf/spring-cloud-dataflow/ && mvn clean package && \
+#cp /data/scdf/spring-cloud-dataflow/spring-cloud-dataflow-server-local/target/spring-cloud-dataflow-server-local-*.jar /data/ && \
+#cp /data/scdf/spring-cloud-dataflow/spring-cloud-dataflow-shell/target/spring-cloud-dataflow-shell-*.jar /data/ && \
+#mvn clean && \
+#rm -rf /data/scdf
 
 USER gpadmin
 
