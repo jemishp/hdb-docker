@@ -29,3 +29,4 @@ fi
 
 su -l gpadmin -c "start-hdb.sh"
 su -l gpadmin -c "start-scdf.sh"
+su -l gpadmin -c "start-zepp.sh"

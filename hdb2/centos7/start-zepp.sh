@@ -8,15 +8,16 @@ download_zeppelin () {
 }
 
 unzip_zeppelin () {
-  tar -xvzf /tmp/zeppelin-0.6.1-bin-netinst.tgz -C /usr/local/
+  sudo tar -xvzf /tmp/zeppelin-0.6.1-bin-netinst.tgz -C /usr/local/
 }
 
 start_zeppelin () {
-  /usr/local/zeppelin-*/bin/zeppelin-daemon.sh start &
+  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh start &
 }
 
 install_interpreters () {
-  bin/install-interpreter.sh -n shell,python,postgresql,file,angular,md,jdbc,elasticsearch,hbase
+  sudo /usr/local/zeppelin-*/bin/install-interpreter.sh -n shell,python,postgresql,file,angular,md,jdbc,elasticsearch,hbase
+  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh restart &
 }
 
 if [ "${HOSTNAME}" == "centos7-zepp-datanode1" ]; then
