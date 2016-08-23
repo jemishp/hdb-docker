@@ -11,8 +11,8 @@ CLUSTER_ID := $(OS_VERSION)
 LOCAL :=
 # networks used in docker
 NETWORK := $(CLUSTER_ID)_hawq_network
-ZEPP := 1
-SCDF := 1
+ZEPP := 0
+SCDF := 0
 
 all:
 	@echo " Usage:"
