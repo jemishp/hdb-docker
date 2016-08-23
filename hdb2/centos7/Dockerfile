@@ -93,6 +93,7 @@ COPY entrypoint.sh /usr/bin/entrypoint.sh
 COPY start-hdfs.sh /usr/bin/start-hdfs.sh
 COPY start-hdb2.sh /usr/bin/start-hdb.sh
 COPY start-zepp.sh /usr/bin/start-zepp.sh
+COPY start-scdf.sh /usr/bin/start-scdf.sh
 COPY madlib-1.9-1.x86_64.rpm /tmp/madlib-1.9-1.x86_64.rpm
 
 
