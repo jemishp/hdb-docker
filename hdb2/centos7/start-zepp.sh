@@ -12,12 +12,12 @@ unzip_zeppelin () {
 }
 
 start_zeppelin () {
-  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh start &
+  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh start
 }
 
 install_interpreters () {
   sudo /usr/local/zeppelin-*/bin/install-interpreter.sh -n shell,python,postgresql,file,angular,md,jdbc,elasticsearch,hbase
-  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh restart &
+  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh restart 
 }
 
 if [ "${HOSTNAME}" == "centos7-zepp-datanode1" ]; then
