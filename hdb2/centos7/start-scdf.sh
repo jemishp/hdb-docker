@@ -18,7 +18,7 @@ start_scdf_shell () {
 if [ "${HOSTNAME}" == "centos7-scdf-datanode1" ]; then
   echo "Will start scdf admin and shell on this node"
   start_scdf_admin
-  start_scdf_shell
+  #start_scdf_shell
 else
   echo "No scdf needed on this node"
 fi
