@@ -6,7 +6,9 @@ sudo /usr/sbin/sshd
 
 start_scdf_admin () {
   cd /data/
-  java -jar spring-cloud-dataflow-server-local-*.BUILD-SNAPSHOT.jar &
+  java -jar spring-cloud-dataflow-server-local-1.0.1.BUILD-SNAPSHOT.jar \
+  --spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.brokers=centos7-kafka:9092 \
+  --spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.zkNodes=centos7-kafka:2181 > ~/scdf-admin.log &
 }
 
 start_scdf_shell () {
