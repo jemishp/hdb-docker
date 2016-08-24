@@ -13,7 +13,9 @@ start_scdf_admin () {
 
 start_scdf_shell () {
   cd /data/
-  java -jar spring-cloud-dataflow-shell-*.BUILD-SNAPSHOT.jar &
+  java -jar spring-cloud-dataflow-shell-*.BUILD-SNAPSHOT.jar & \
+  app import --uri http://bit.ly/stream-applications-kafka-maven
+  
 }
 
 
