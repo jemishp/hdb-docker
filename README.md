@@ -29,7 +29,7 @@ make run
 
 **Note**: This script will configure 1 NN, 3 DNs using a pre-built image that it will download from Docker Hub. The NN is Apache HAWQ (incubating) Master and DNs are Apache HAWQ (incubating) segments.
 
-Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
+Once you have 4 containers running, [connect to the NN container](#connect) as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
 
 ## Clean up and start the Simple environment up again
 
@@ -41,7 +41,7 @@ make clean
 make distclean
 make run
 ```
-## Connect to a container
+## <a name="connect"></a> Connect to a container
 
 To connect to any container use the command below:
 
@@ -73,7 +73,7 @@ make run ZEPP=1 SCDF=1
 
 **Note**: This script will configure 1 NN, 5 DNs using a pre-built image that it will download from Docker Hub. The NN is Apache HAWQ (incubating) Master and DN[1-3] are Apache HAWQ (incubating) segments.
 
-Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
+Once you have 4 containers running, [connect to the NN container](#connect) as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
 
 You should also have 1 Zeppelin, 1 kafka and 1 Spring Cloud Data Flow containers.
 
