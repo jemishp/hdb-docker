@@ -63,7 +63,7 @@ gpadmin=# select version();
 
 # <a name="buildadv"></a> BUILD Instructions Advanced
 
-**Note**: If you want to have Apache HAWQ (incubating) along with Spring Cloud Data Flow and Zeppelin, then follow the steps below. Keep in mind that this will spin up a total of 7 containers (so 3 more containers than the simple case). The Advanced version uses more resources on your Docker host so provision accordingly.
+If you want to have Apache HAWQ (incubating) along with Spring Cloud Data Flow and Zeppelin, then follow the steps below. Keep in mind that this will spin up a total of 7 containers (so 3 more containers than the simple case). **The Advanced version uses more resources on your Docker host** so provision accordingly.
 
 ```
 git clone https://github.com/jpatel-pivotal/hdb-docker.git
