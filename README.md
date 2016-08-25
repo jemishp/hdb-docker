@@ -31,6 +31,8 @@ make run
 
 Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
 
+## Clean up and start the Simple environment up again
+
 To start over, use the commands below:
 
 ```
@@ -38,6 +40,25 @@ make stop
 make clean
 make distclean
 make run
+```
+## Connect to a container
+
+To connect to any container use the command below:
+
+```
+docker exec -it <container-name> bash
+```
+
+Replace **<container-name>** in the command above with the name of the container you want to connect to.
+
+## Connecting to Apache HAWQ (incubating)
+
+Once processes have started up you can use the commands below to connect to the NN container and then running SQL queries in Apache HAWQ (incubating)
+
+```
+docker exec -it centos7-namenode bash
+[gpadmin@centos7-namenode data]$ psql
+gpadmin=# select version();
 ```
 
 # <a name="buildadv"></a> BUILD Instructions Advanced
@@ -56,7 +77,7 @@ Once you have 4 containers running, connect to the NN container as the output of
 
 You should also have 1 Zeppelin, 1 kafka and 1 Spring Cloud Data Flow containers.
 
-# Clean up and start the Advanced environment up again
+## Clean up and start the Advanced environment up again
 
 To start over with a clean environment if you ran the [advanced build commands](#buildadv), use the commands below:
 
@@ -67,7 +88,7 @@ make distclean ZEPP=1 SCDF=1
 make run ZEPP=1 SCDF=1
 ```
 
-# Restart Advanced environemnt up again
+## Restart Advanced environemnt up again
 
 To restart the containers if you ran the [advanced build commands](#buildadv), use the command below:
 
@@ -75,26 +96,7 @@ To restart the containers if you ran the [advanced build commands](#buildadv), u
 make restart ZEPP=1 SCDF=1
 ```
 
-# Connect to a container
-
-To connect to any container use the command below:
-
-```
-docker exec -it <container-name> bash
-```
-
-Replace **<container-name>** in the command above with the name of the container you want to connect to.
-
-# Connecting to Apache HAWQ (incubating)
-
-Once processes have started up you can use the commands below to connect to the NN container and then running SQL queries in Apache HAWQ (incubating)
-
-```
-docker exec -it centos7-namenode bash
-[gpadmin@centos7-namenode data]$ psql
-gpadmin=# select version();
-```
-# Connecting to Zeppelin UI
+## Connecting to Zeppelin UI
 
 If you ran the [advanced build commands](#buildadv), then you can use the URL below to connect to Zeppelin's UI
 
@@ -117,7 +119,7 @@ Below is a list of the pre-installed interpreters:
 
 For details on Zeppelin, please follow the [documentation](https://zeppelin.apache.org/docs/0.6.1/).
 
-# Connecting to Spring Cloud Data Flow dashboard and starting up the Shell
+## Connecting to Spring Cloud Data Flow dashboard and starting up the Shell
 
 If you ran the [advanced build commands](#buildadv), then you can use the url below to connect to the SCDF Dashboard.
 
