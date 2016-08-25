@@ -8,7 +8,7 @@ RUN sed -i 's/tsflags=nodocs//g' /etc/yum.conf
 # add yum repo for libhdfs3
 #RUN curl -L "https://bintray.com/wangzw/rpm/rpm" -o /etc/yum.repos.d/bintray-wangzw-rpm.repo
 
-RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-7.noarch.rpm && \
+RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm && \
  yum history sync && yum -y update  && yum clean all
 
 
@@ -33,7 +33,7 @@ RUN yum makecache && yum install -y postgresql-devel && \
  pip --retries=50 --timeout=300 install pg8000 simplejson unittest2 pycrypto pygresql pyyaml lockfile paramiko psi && \
  pip --retries=50 --timeout=300 install http://darcs.idyll.org/~t/projects/figleaf-0.6.1.tar.gz && \
  pip --retries=50 --timeout=300 install http://sourceforge.net/projects/pychecker/files/pychecker/0.8.19/pychecker-0.8.19.tar.gz/download && \
- yum erase -y postgresql postgresql-libs postgresql-devel && \
+ pip --retries=50 --timeout=300 install  numpy scipy matplotlib plotly psycopg2 queries pandas sqlalchemy redis python-dotenv && \
  yum clean all
 
 # setup ssh server and keys for root
@@ -92,7 +92,10 @@ COPY conf/* /etc/hadoop/conf/
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 COPY start-hdfs.sh /usr/bin/start-hdfs.sh
 COPY start-hdb2.sh /usr/bin/start-hdb.sh
+COPY start-zepp.sh /usr/bin/start-zepp.sh
+COPY start-scdf.sh /usr/bin/start-scdf.sh
 COPY madlib-1.9-1.x86_64.rpm /tmp/madlib-1.9-1.x86_64.rpm
+
 
 # Install HDB2
 
@@ -118,6 +121,14 @@ cd /data/hawq/pxf/ && \
 ./gradlew clean && \
 rm -rf /data/hawq/pxf/distributions && \
 rm -rf /data/hawq && yum history sync && yum clean all
+
+# Install SCDF
+RUN git clone https://github.com/spring-cloud/spring-cloud-dataflow.git /data/scdf && \
+cd /data/scdf && ./mvnw clean install && \
+cp /data/scdf/spring-cloud-dataflow-server-local/target/spring-cloud-dataflow-server-local-*.BUILD-SNAPSHOT.jar /data/ && \
+cp /data/scdf/spring-cloud-dataflow-shell/target/spring-cloud-dataflow-shell-*.BUILD-SNAPSHOT.jar /data/ && \
+./mvnw clean && \
+rm -rf /data/scdf
 
 USER gpadmin
 
