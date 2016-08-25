@@ -21,28 +21,36 @@ External data Query Framework or PXF is also installed and enabled.
 
 # BUILD Instructions Simple
 
-1. git clone this repo
-1. cd hdb-docker/hdb2
-1. make run (this will configure 1 NN, 3 DNs using a pre-built image that it will download from Docker Hub. The NN is Apache HAWQ (incubating) Master and DNs are Apache HAWQ (incubating) segments)
+```
+git clone https://github.com/jpatel-pivotal/hdb-docker.git
+cd hdb-docker/hdb2
+make run
+```
 
-**Note**: Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
+**Note**: This script will configure 1 NN, 3 DNs using a pre-built image that it will download from Docker Hub. The NN is Apache HAWQ (incubating) Master and DNs are Apache HAWQ (incubating) segments.
+
+Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
 
 To start over, use the commands below:
 
-1. make stop
-1. make clean
-1. make distclean
-1. make run
+```
+make stop
+make clean
+make distclean
+make run
+```
 
 # <a name="buildadv"></a> BUILD Instructions Advanced
 
-**Note**: If you want to have Apache HAWQ (incubating) along with Spring Cloud Data Flow and Zeppelin, then follow the steps below.
+**Note**: If you want to have Apache HAWQ (incubating) along with Spring Cloud Data Flow and Zeppelin, then follow the steps below. Keep in mind that this will spin up a total of 7 containers (so 3 more containers than the simple case). The Advanced version uses more resources on your Docker host so provision accordingly.
 
-1. git clone this repo
-1. cd hdb-docker/hdb2
-1. make run ZEPP=1 SCDF=1
+```
+git clone https://github.com/jpatel-pivotal/hdb-docker.git
+cd hdb-docker/hdb2
+make run ZEPP=1 SCDF=1
+```
 
-**Note**: This will configure 1 NN, 5 DNs using a pre-built image that it will download from Docker Hub. The NN is Apache HAWQ (incubating) Master and DN[1-3] are Apache HAWQ (incubating) segments.
+**Note**: This script will configure 1 NN, 5 DNs using a pre-built image that it will download from Docker Hub. The NN is Apache HAWQ (incubating) Master and DN[1-3] are Apache HAWQ (incubating) segments.
 
 Once you have 4 containers running, connect to the NN container as the output of make run shows. tail -f ~/start_hdb.log to see Apache HAWQ (incubating) processes starting up. It usually takes a few minutes before Apache HAWQ (incubating) and PXF processes are online. Alternatively you could check for running postgres and pxf using ps.
 
@@ -52,16 +60,20 @@ You should also have 1 Zeppelin, 1 kafka and 1 Spring Cloud Data Flow containers
 
 To start over with a clean environment if you ran the [advanced build commands](#buildadv), use the commands below:
 
-1. make stop ZEPP=1 SCDF=1
-1. make clean ZEPP=1 SCDF=1
-1. make distclean ZEPP=1 SCDF=1
-1. make run ZEPP=1 SCDF=1
+```
+make stop ZEPP=1 SCDF=1
+make clean ZEPP=1 SCDF=1
+make distclean ZEPP=1 SCDF=1
+make run ZEPP=1 SCDF=1
+```
 
 # Restart Advanced environemnt up again
 
 To restart the containers if you ran the [advanced build commands](#buildadv), use the command below:
 
-1. make restart ZEPP=1 SCDF=1
+```
+make restart ZEPP=1 SCDF=1
+```
 
 # Connect to a container
 
