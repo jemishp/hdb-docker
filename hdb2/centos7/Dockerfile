@@ -34,7 +34,6 @@ RUN yum makecache && yum install -y postgresql-devel && \
  pip --retries=50 --timeout=300 install http://darcs.idyll.org/~t/projects/figleaf-0.6.1.tar.gz && \
  pip --retries=50 --timeout=300 install http://sourceforge.net/projects/pychecker/files/pychecker/0.8.19/pychecker-0.8.19.tar.gz/download && \
  pip --retries=50 --timeout=300 install  numpy scipy matplotlib plotly psycopg2 queries pandas sqlalchemy redis python-dotenv && \
- yum erase -y postgresql postgresql-libs postgresql-devel && \
  yum clean all
 
 # setup ssh server and keys for root
