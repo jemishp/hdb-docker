@@ -17,7 +17,10 @@ start_zeppelin () {
 
 install_interpreters () {
   sudo /usr/local/zeppelin-*/bin/install-interpreter.sh -n shell,python,postgresql,file,angular,md,jdbc,elasticsearch,hbase
-  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh restart 
+  sudo cp /usr/local/zeppelin-0.6.1-bin-netinst/conf/zeppelin-site.xml.template /usr/local/zeppelin-0.6.1-bin-netinst/conf/zeppelin-site.xml
+  sudo sed -i '/.*versioning.*/ s/$/ -->/' /usr/local/zeppelin-0.6.1-bin-netinst/conf/zeppelin-site.xml
+
+  sudo /usr/local/zeppelin-*/bin/zeppelin-daemon.sh restart
 }
 
 if [ "${HOSTNAME}" == "centos7-zepp-datanode1" ]; then
