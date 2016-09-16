@@ -107,7 +107,7 @@ run-zepp-container:
 run-scdf-container:
 	@echo "run ${CLUSTER_ID}-scdf-datanode$(SCDF) container"
 	@if [ -z "`docker ps -a --filter="name=${CLUSTER_ID}-scdf-datanode$(SCDF)" | grep -v CONTAINER`" ]; then \
-		docker run -p 9393:9393 -itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-scdf-datanode$(SCDF) \
+		docker run -p 9393:9393 -p 9000:9000-itd --net=$(NETWORK) --hostname=${CLUSTER_ID}-scdf-datanode$(SCDF) \
 			--name=${CLUSTER_ID}-scdf-datanode$(SCDF) -e NAMENODE=${CLUSTER_ID}-namenode \
 			--volumes-from ${CLUSTER_ID}-data jpatel4pivotal/hdb2:$(OS_VERSION); \
 	else \
