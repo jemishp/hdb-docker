@@ -13,9 +13,11 @@ start_scdf_admin () {
 
 start_scdf_shell () {
   cd /data/
-  java -jar spring-cloud-dataflow-shell-*.BUILD-SNAPSHOT.jar & \
-  app import --uri http://bit.ly/stream-applications-kafka-maven
-  
+  echo -e 'app import --uri http://bit.ly/stream-applications-kafka-maven' >> demo.cmd
+  echo -e 'stream destroy --name demo ' >> demo.cmd
+  echo -e 'stream create --name demo --definition "http --server.port=9000 | hdfs --hdfs.fs-uri=hdfs://centos7-namenode --hdfs.directory=/demo --hdfs.file-name=demoData --hdfs.in-use-prefix=IU" --deploy' >> demo.cmd
+  echo 'script --file demo.cmd' | java -jar spring-cloud-dataflow-shell-*.BUILD-SNAPSHOT.jar
+
 }
 
 
