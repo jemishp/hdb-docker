@@ -19,7 +19,7 @@ start_scdf_shell () {
     echo -e 'stream create --name demo --definition "http --server.port=9000 | hdfs --hdfs.fs-uri=hdfs://centos7-namenode --hdfs.directory=/demo --hdfs.file-name=demoData --hdfs.in-use-prefix=IU --hdfs.flush-timeout=1000" --deploy' >> demo.cmd
     echo 'script --file demo.cmd' | java -jar spring-cloud-dataflow-shell-*.BUILD-SNAPSHOT.jar
   else
-    sleep 1
+    sleep 5
     start_scdf_shell
   fi
 
