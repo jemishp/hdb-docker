@@ -13,7 +13,9 @@ start_scdf_admin () {
 
 start_scdf_shell () {
   cd /data/
-  #if [ -z "`curl http://localhost:9393/`" ]; then
+  if [ -f demo.cmd ]; then
+    rm -f demo.cmd
+  fi
   echo -e 'dataflow config server http://localhost:9393/' >> demo.cmd
   echo -e 'app import --uri http://bit.ly/stream-applications-kafka-maven' >> demo.cmd
   echo -e 'stream destroy --name demo ' >> demo.cmd
