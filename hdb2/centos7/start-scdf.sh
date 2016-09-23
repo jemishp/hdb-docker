@@ -19,7 +19,7 @@ start_scdf_shell () {
   echo -e 'dataflow config server http://localhost:9393/' >> demo.cmd
   echo -e 'app import --uri http://bit.ly/stream-applications-kafka-maven' >> demo.cmd
   echo -e 'stream all destroy --force ' >> demo.cmd
-  echo -e 'stream create --name demo --definition "http --server.port=9000 | hdfs --hdfs.fs-uri=hdfs://centos7-namenode --hdfs.directory=/demo --hdfs.file-name=demoData --hdfs.rollover=20000000" --deploy' >> demo.cmd
+  echo -e 'stream create --name demo --definition "http --server.port=9000 | hdfs --hdfs.fs-uri=hdfs://centos7-namenode --hdfs.directory=/demo --hdfs.file-name=demoData --hdfs.rollover=100000" --deploy' >> demo.cmd
   echo 'script --file demo.cmd' | java -jar spring-cloud-dataflow-shell-*.BUILD-SNAPSHOT.jar
 
 
