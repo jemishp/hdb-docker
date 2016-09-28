@@ -6,7 +6,7 @@ sudo /usr/sbin/sshd
 
 start_scdf_admin () {
   cd /data/
-  if [ -z "`ps aux | grep spring-cloud-dataflow-server-local-1.0.1.BUILD-SNAPSHOT.jar | grep -v grep`" ]; then
+  if [ ! -z "`ps aux | grep spring-cloud-dataflow-server-local-1.0.1.BUILD-SNAPSHOT.jar | grep -v grep`" ]; then
     pid=$(ps aux | grep spring-cloud-dataflow-server-local-1.0.1.BUILD-SNAPSHOT.jar | grep -v grep | awk '{print $2}')
     echo "PID: ${pid}"
     kill -9 ${pid}
