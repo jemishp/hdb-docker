@@ -6,6 +6,9 @@ sudo /usr/sbin/sshd
 
 start_scdf_admin () {
   cd /data/
+  if [ -z "`ps aux | grep spring-cloud-dataflow-server-local | grep -v grep`" ]; then
+    kill -9 $(ps aux | grep spring-cloud-dataflow-server-local | grep -v grep | awk -F '{print $2}')
+  fi  
   java -jar spring-cloud-dataflow-server-local-1.0.1.BUILD-SNAPSHOT.jar \
   --spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.brokers=centos7-kafka:9092 \
   --spring.cloud.dataflow.applicationProperties.stream.spring.cloud.stream.kafka.binder.zkNodes=centos7-kafka:2181 > ~/scdf-admin.log &
