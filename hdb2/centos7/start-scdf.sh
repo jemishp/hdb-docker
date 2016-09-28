@@ -25,7 +25,7 @@ start_scdf_shell () {
   echo -e 'dataflow config server http://localhost:9393/' >> demo.cmd
   echo -e 'app import --uri http://bit.ly/stream-applications-kafka-maven' >> demo.cmd
   echo -e 'stream all destroy --force ' >> demo.cmd
-  echo -e 'stream create --name demo --definition "http --server.port=9000 | scriptable-transform \
+  echo -e 'stream create --name demo --definition "http --server.port=9000 | scriptable-transform 
   --language=groovy --script="import groovy.json.JsonSlurper\n \ndef jsonCar = new JsonSlurper().parseText( payload )\ndef \
   csvString = jsonCar.amountOfFuel + "","" + jsonCar.tankCapacqity + "","" + jsonCar.currentMileage + "","" + jsonCar.currentGear + "","" \
   + jsonCar.currentRpm + "","" + jsonCar.eBrake + "","" + jsonCar.engTemp + "","" + jsonCar.insideTemp + "","" + jsonCar.outsideTemp + "","" \
