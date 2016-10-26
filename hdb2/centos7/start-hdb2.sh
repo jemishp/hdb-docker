@@ -4,10 +4,14 @@ sudo /usr/sbin/sshd
 
 
 config_pxf () {
+  wget -O /data/commons-lang3-3.0.jar http://central.maven.org/maven2/org/apache/commons/commons-lang3/3.0/commons-lang3-3.0.jar
+  sudo sed -i '$ a\/data/commons-lang-*[0-9].jar' /etc/pxf/conf/pxf-public.classpath
   sudo sed -i 's|/usr/lib/hadoop/lib/native|/usr/hdp/current/hadoop-client/lib/native|' /etc/pxf/conf/pxf-env.sh
   sudo sed -i 's|/usr/java/default|/etc/alternatives/java_sdk|' /etc/pxf/conf/pxf-env.sh
   sudo sed -i '$ a\# Hadoop HOME directory'  /etc/pxf/conf/pxf-env.sh
-  sudo sed -i '$ a\ export HADOOP_HOME=/usr/hdp/current/hadoop-client' /etc/pxf/conf/pxf-env.sh
+  sudo sed -i '$ a\export HADOOP_HOME=/usr/hdp/current/hadoop-client' /etc/pxf/conf/pxf-env.sh
+  # turnign DEBUG on for testing
+  sudo sed -i 's/#log4j/log4j/' /etc/pxf/conf/pxf-log4j.properties
 }
 
 init_pxf () {
