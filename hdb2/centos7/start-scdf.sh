@@ -21,7 +21,7 @@ start_scdf_shell () {
   if [ -f demo.cmd ]; then
     rm -f demo.cmd
   fi
-  sleep 10
+  sleep 30
   echo -e 'dataflow config server http://localhost:9393/' >> demo.cmd
   echo -e 'app import --uri http://bit.ly/stream-applications-kafka-maven' >> demo.cmd
   echo -e 'stream all destroy --force ' >> demo.cmd

@@ -84,7 +84,7 @@ RUN ln -s /usr/hdp/current/hadoop-hdfs-namenode/../hadoop/sbin/hadoop-daemon.sh 
 
 # create user gpadmin since HAWQ cannot run under root
 RUN groupadd -g 1000 gpadmin && \
- useradd -u 1000 -g 1000 -G hadoop gpadmin && \
+ useradd -u 1000 -g 1000 -G hdfs,hadoop gpadmin && \
  echo "gpadmin  ALL=(ALL)       NOPASSWD: ALL" > /etc/sudoers.d/gpadmin
 
 COPY conf/* /etc/hadoop/conf/
