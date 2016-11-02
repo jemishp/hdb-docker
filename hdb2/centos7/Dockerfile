@@ -122,6 +122,11 @@ cd /data/hawq/pxf/ && \
 rm -rf /data/hawq/pxf/distributions && \
 rm -rf /data/hawq && yum history sync && yum clean all
 
+# Adding PXF User to superuser group for HDFS access
+
+RUN groupadd supergroup && \
+ usermod -G supergroup -a pxf
+
 # Install SCDF
 RUN git clone https://github.com/spring-cloud/spring-cloud-dataflow.git /data/scdf && \
 cd /data/scdf && ./mvnw clean install && \
